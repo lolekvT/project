@@ -42,7 +42,7 @@ public class App {
 		
 		
 		
-		System.out.println("Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
+		System.out.println("       Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
 		System.out.println("1) Wyswietl firmy korzystajace z centrum");
 		System.out.println("2) Wyswietl banki korzystajace z centrum");
 		answer = input.nextLine();
@@ -51,7 +51,11 @@ public class App {
 		case("1"):
 			for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
 				System.out.println(i.getNazwa());
-		
+		case("2"):
+			for(Bank i : banki.getListaBankow())
+			{
+				System.out.println(i.getNazwa());
+			}
 		}
 	}
 
