@@ -2,9 +2,9 @@ package logic;
 
 public class KartaBankowa extends KartaPlatnicza {
 
-	KartaBankowa(String nrKonta, String imie, String nazwisko, double kwota)
+	public KartaBankowa(String nrKonta, String imie, String nazwisko, double saldo)
 	{
-		super(nazwisko, nazwisko, nazwisko, kwota);
+		super(nrKonta, imie, nazwisko, saldo);
 	}
 	
 	public boolean zaplac(String nrKonta, double kwota)

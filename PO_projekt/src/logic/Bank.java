@@ -9,7 +9,6 @@ public class Bank {
 	
 	
 	public Bank(String nazwa) {
-		super();
 		this.nazwa = nazwa;
 	}
 

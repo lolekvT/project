@@ -1,9 +1,14 @@
 package app;
+import java.util.Scanner;
+
 import logic.*;
 
 public class App {
 
 	public static void main(String[] args) {
+		
+		Scanner input = new Scanner(System.in);
+		String answer;
 		
 		/// PRZYKLADOWO DZIALAJACA APLIKACJA
 		CentrumObslugi centrumobslugi = new CentrumObslugi();
@@ -28,7 +33,19 @@ public class App {
 		else
 			System.out.println("Nieudana Autoryzacja");
 			
-
+		//////////////////////////////////
+		
+		answer = input.nextLine();
+		
+		System.out.println("Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
+		System.out.println("1) Wyswietl firmy korzystajace z centrum");
+		System.out.println("2) Wyswietl banki korzystajace z centrum");
+		switch (answer) {
+		
+		case("1"):
+			
+		
+		}
 	}
 
 }
