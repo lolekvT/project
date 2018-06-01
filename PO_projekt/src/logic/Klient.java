@@ -1,14 +1,26 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Klient {
 	
-	public KartaPlatnicza kartaplatnicza;
+	private KartaPlatnicza kartaplatnicza;
+	List <KartaPlatnicza>listaKartKlientow = new ArrayList<>();
 	
 	public Klient(String nrKonta, String imie, String nazwisko, double  saldo){
-		 kartaplatnicza = new KartaKredytowa(nrKonta, imie, nazwisko, saldo); 
+		 kartaplatnicza = new KartaDebetowa(nrKonta, imie, nazwisko, saldo);
+		 listaKartKlientow.add(kartaplatnicza);
 	}
 	public KartaPlatnicza getKartaPlatnicza()
 	{
-		return kartaplatnicza;
+		if(listaKartKlientow.size() != 1) {
+			for(KartaPlatnicza kartaplatnicza : listaKartKlientow)
+				return kartaplatnicza;
+		}
+			return kartaplatnicza;
+	}
+	public void dodajKarte(KartaPlatnicza kartaplatnicza) {
+		listaKartKlientow.add(kartaplatnicza);
 	}
 }

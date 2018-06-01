@@ -10,40 +10,47 @@ public class App {
 		Scanner input = new Scanner(System.in);
 		String answer;
 		
-		/// PRZYKLADOWO DZIALAJACA APLIKACJA
+		////////////////// PRZYKLADOWO DZIALAJACA APLIKACJA
 		CentrumObslugi centrumobslugi = new CentrumObslugi();
 		
 		Banki banki = new Banki();
 		Bank bank = new Bank("BZWBK");
 		banki.dodaj(bank);
-		//System.out.println(banki.listaBankow.get(0).nazwa);
 		
 		Sklep sklep = new Sklep("ABC", "156987");
-		KlientCentrum klientcentrum = new KlientCentrum("ABC","156789");
-		//KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",)
+		Zaklad zaklad = new Zaklad("Fryzjek Maciek","469877");
+		centrumobslugi.getListaKlientowCentrum().add(sklep);
+		centrumobslugi.getListaKlientowCentrum().add(zaklad);
+		
+		//KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
+		
 		Klient klient = new Klient("148654","Jan","Kowalski",100.0);
+		Klient klient1 = new Klient("151654","Zbigniew","Kowalski",100.0);
+		
 		bank.dodajKlienta(klient.getKartaPlatnicza());
-		System.out.println(klient.kartaplatnicza.saldo);
-		klient.kartaplatnicza.zaplac("156987", 20.0);
-		System.out.println(klient.kartaplatnicza.saldo);
+		System.out.println(klient.getKartaPlatnicza().getSaldo());
+		klient.getKartaPlatnicza().zaplac("156987", 20.0);
+		System.out.println(klient.getKartaPlatnicza().getSaldo());
 		bank.listaKartKlientow.add(klient.getKartaPlatnicza());
 		
-		if(klientcentrum.Autoryzuj(banki, 20.0, klient.kartaplatnicza) == true)
+		if(sklep.Autoryzuj(banki, 20.0, klient.getKartaPlatnicza()) == true)
 			System.out.println("Udana Autoryzacja");
 		else
 			System.out.println("Nieudana Autoryzacja");
 			
 		//////////////////////////////////
 		
-		answer = input.nextLine();
+		
 		
 		System.out.println("Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
 		System.out.println("1) Wyswietl firmy korzystajace z centrum");
 		System.out.println("2) Wyswietl banki korzystajace z centrum");
+		answer = input.nextLine();
 		switch (answer) {
 		
 		case("1"):
-			
+			for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
+				System.out.println(i.getNazwa());
 		
 		}
 	}

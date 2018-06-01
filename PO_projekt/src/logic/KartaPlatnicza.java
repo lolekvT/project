@@ -2,12 +2,21 @@ package logic;
 
 public class KartaPlatnicza {
 	
-	public String nrKonta;
-	public String imie;
-	public String nazwisko;
+	protected String nrKonta;
+	protected String imie;
+	protected String nazwisko;
 	
-	public double saldo;
-	public double kwota;
+	protected double saldo;
+	protected double kwota;
+	
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
 	
 	public KartaPlatnicza(String nrKonta, String imie, String nazwisko, double saldo)
 	{
