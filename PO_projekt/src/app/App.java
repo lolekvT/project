@@ -51,11 +51,13 @@ public class App {
 		case("1"):
 			for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
 				System.out.println(i.getNazwa());
+		break;
 		case("2"):
 			for(Bank i : banki.getListaBankow())
 			{
 				System.out.println(i.getNazwa());
 			}
+		break;
 		}
 	}
 

@@ -4,6 +4,7 @@ public class KlientCentrum extends Banki {
 	
 	protected String nrKonta;
 	protected String nazwa;
+	protected String dataDolaczenia;
 	
 	public String getNrKonta() {
 		return nrKonta;
@@ -28,7 +29,7 @@ public class KlientCentrum extends Banki {
 		for(int i=0; i<banki.listaBankow.size(); i++) {
 			for(int j=0; j<banki.listaBankow.get(i).listaKartKlientow.size(); j++) {
 				if(banki.listaBankow.get(i).listaKartKlientow.get(j).nrKonta.equals(kartaplatnicza.nrKonta)
-						&& (banki.listaBankow.get(i).listaKartKlientow.get(j) instanceof KartaPlatnicza )){
+						&& (banki.listaBankow.get(i).listaKartKlientow.get(j).zaplac(nrKonta, kwota) == true )){
 						flaga = true;
 				}
 			}

@@ -9,7 +9,7 @@ public class CentrumObslugi {
 	//List <Firma>listaFirm = new ArrayList<>();
 	//List <Zaklad>listaZakladow = new ArrayList<>();
 	
-	List <KlientCentrum>listaKlientowCentrum = new ArrayList<>();
+	private List <KlientCentrum>listaKlientowCentrum = new ArrayList<>();
 
 	public List<KlientCentrum> getListaKlientowCentrum() {
 		return listaKlientowCentrum;

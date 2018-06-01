@@ -6,7 +6,7 @@ import java.util.List;
 public class Klient {
 	
 	private KartaPlatnicza kartaplatnicza;
-	List <KartaPlatnicza>listaKartKlientow = new ArrayList<>();
+	private List <KartaPlatnicza>listaKartKlientow = new ArrayList<>();
 	
 	public Klient(String nrKonta, String imie, String nazwisko, double  saldo){
 		 kartaplatnicza = new KartaDebetowa(nrKonta, imie, nazwisko, saldo);

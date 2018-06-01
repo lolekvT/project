@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public class Banki {
 
-    List <Bank>listaBankow = new ArrayList<>();
+   protected List <Bank>listaBankow = new ArrayList<>();
+   
+
+   public Banki(){};
+   
 	public List<Bank> getListaBankow() {
 		return listaBankow;
 	}
@@ -13,7 +17,6 @@ public class Banki {
 		this.listaBankow = listaBankow;
 	}
 
-	public Banki(){};
 	
 	public void dodaj(Bank bank) {
 		listaBankow.add(bank);
