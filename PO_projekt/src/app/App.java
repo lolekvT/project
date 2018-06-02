@@ -28,15 +28,16 @@ public class App {
 		Klient klient1 = new Klient("151654","Zbigniew","Kowalski",100.0);
 		
 		bank.dodajKlienta(klient.getKartaPlatnicza());
+		bank.dodajKlienta(klient1.getKartaPlatnicza());
 		System.out.println(klient.getKartaPlatnicza().getSaldo());
-		klient.getKartaPlatnicza().zaplac("156987", 20.0);
+		//klient.getKartaPlatnicza().zaplac("156987", 20.0);
 		System.out.println(klient.getKartaPlatnicza().getSaldo());
-		bank.listaKartKlientow.add(klient.getKartaPlatnicza());
 		
-		if(sklep.Autoryzuj(banki, 20.0, klient.getKartaPlatnicza()) == true)
+		if(sklep.Autoryzuj(banki, 20.0,"156987",klient.getKartaPlatnicza()) == true)
 			System.out.println("Udana Autoryzacja");
 		else
 			System.out.println("Nieudana Autoryzacja");
+		System.out.println(klient.getKartaPlatnicza().getSaldo());
 			
 		//////////////////////////////////
 		

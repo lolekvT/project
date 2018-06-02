@@ -6,9 +6,13 @@ public class KartaKredytowa extends KartaPlatnicza {
 		super(nrKonta, imie, nazwisko, saldo);
 	}
 	
+	public boolean czyMoznaZaplacic(String nrKonta, double kwota){
+		return true;
+	}
+	
 	public boolean zaplac(String nrKonta, double kwota)
 	{
 		saldo-=kwota;
-		return true;
+		return czyMoznaZaplacic(nrKonta, kwota);
 	}
 }
