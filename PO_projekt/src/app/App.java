@@ -1,5 +1,7 @@
 package app;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 import logic.*;
 
@@ -39,27 +41,69 @@ public class App {
 			System.out.println("Nieudana Autoryzacja");
 		System.out.println(klient.getKartaPlatnicza().getSaldo());
 			
-		//////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		List<Bank> lbanki = new ArrayList<>();  // POJEMNIKI NA OBJEKTY KTORE BED¥ DODAWANE WCZASIE DZIA£ANIA PROGRAMU
+		List<Sklep> lsklepy = new ArrayList<>();
+		List<Klient> lfirmy = new ArrayList<>();
+		List<Zaklad> lzaklady = new ArrayList<>();
+		List<Klient> lklienci = new ArrayList<>();
 		
 		
 		
-		System.out.println("       Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
+		System.out.println("               Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
 		System.out.println("1) Wyswietl firmy korzystajace z centrum");
 		System.out.println("2) Wyswietl banki korzystajace z centrum");
-		answer = input.nextLine();
+		System.out.println("3) Dodaj firme");
+		System.out.println("4) Usun firme");
+		System.out.println("5) Dodaj bank");
+		System.out.println("6) Usun bank");
+		System.out.println("7) Obs³u¿ ¿¹danie autoryzacji");
+		System.out.println("8) Przeszukaj archiwum");
+		System.out.println("9) Zapisz stan systemu na dysk");
+		
+		while(true) {
+			answer = input.nextLine();
 		switch (answer) {
 		
-		case("1"):
-			for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
-				System.out.println(i.getNazwa());
-		break;
-		case("2"):
-			for(Bank i : banki.getListaBankow())
-			{
-				System.out.println(i.getNazwa());
-			}
-		break;
+			case("1"):
+				for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
+					System.out.println(i.getNazwa());
+			break;
+			case("2"):
+				for(Bank i : banki.getListaBankow())
+				{
+					System.out.println(i.getNazwa());
+				}
+			break;
+			case("3"):
+				System.out.println("Twoja firma jest : 1)sklepem, 2)zakladem, 3)firma transportowa");
+				answer = input.nextLine();
+				if(answer.equals("1"))
+				{
+					System.out.println("Podaj nazwê");
+					answer = input.nextLine();
+				
+				}
+				if(answer.equals("2"))
+				{
+					break;
+				}
+				if(answer.equals("3"))
+				{
+					break;
+				}
+				else System.out.println("Nie rozumiem");
+				break;
+			case("5"):
+				System.out.println("Podaj nazwê");
+				answer = input.nextLine();
+				Bank b = new Bank(answer);
+				lbanki.add(b);
+				banki.dodaj(b);
+				break;
 		}
+			
+	}
 	}
 
 }
