@@ -10,6 +10,13 @@ public class KlientCentrum extends Banki {
 	private KartaPlatnicza kartaplatnicza;
 	protected double saldo;
 	
+	public KlientCentrum(String nazwa, String nrKonta){
+		//super(nazwa);
+		this.nazwa = nazwa;
+		this.nrKonta = nrKonta;
+		dataDolaczenia = new Date().toString();
+	}
+	
 	public String getNrKonta() {
 		return nrKonta;
 	}
@@ -22,11 +29,11 @@ public class KlientCentrum extends Banki {
 	public void setNazwa(String nazwa) {
 		this.nazwa = nazwa;
 	}
-	public KlientCentrum(String nazwa, String nrKonta){
-		//super(nazwa);
-		this.nazwa = nazwa;
-		this.nrKonta = nrKonta;
+	
+	public String getDataDolaczenia() {
+		return dataDolaczenia;
 	}
+	
 	public boolean Autoryzuj(Banki banki, double kwota, String nrKontaFirmy, String nrKonta  ) {
 		boolean flaga = false;
 		Date dataAutoryzacji = new Date();

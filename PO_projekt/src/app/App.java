@@ -65,12 +65,15 @@ public class App {
 		
 			case("1"):
 				for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
-					System.out.println(i.getNazwa());
+					//System.out.println(i.getNazwa()+"    "+i.getSaldo()+"   "+i.getNrKonta());
+					System.out.printf("%-17s\t %.2f$\t %10s \t%s\n", i.getNazwa(), i.getSaldo(), i.getNrKonta(), i.getDataDolaczenia());
+					
 			break;
 			case("2"):
 				for(Bank i : banki.getListaBankow())
 				{
-					System.out.println(i.getNazwa());
+					//System.out.println(i.getNazwa());
+					System.out.printf("%-17s\t %d \t%s", i.getNazwa(),i.getRozmiarListyKlientow(), i.getDataStworzenia());
 				}
 			break;
 			case("3"):
@@ -157,6 +160,12 @@ public class App {
 							}
 						}
 					if(flag == false) System.out.println("Autoryzacja nieudana sprawdz dane");
+			case("10"):
+					for(Bank i : banki.getListaBankow()) {
+						for(KartaPlatnicza j : i.getKartyKlientow())
+							System.out.printf("%-15s%-15s%-15s%-15.2f%-15s\n", j.getNrKonta(), j.getImie(), j.getNazwisko(),
+									j.getSaldo(),j.getData());
+					}
 					
 		}
 			

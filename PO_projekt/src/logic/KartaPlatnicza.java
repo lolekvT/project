@@ -8,7 +8,8 @@ public class KartaPlatnicza {
 	protected String nrKonta;
 	protected String imie;
 	protected String nazwisko;
-	protected String data;
+	protected String data; // data do kiedy karta jest wazna
+	protected String dataStworzenia;
 	protected Date date;
 	Calendar c;
 	
@@ -17,6 +18,22 @@ public class KartaPlatnicza {
 	
 	public double getSaldo() {
 		return saldo;
+	}
+
+	public String getNrKonta() {
+		return nrKonta;
+	}
+
+	public String getImie() {
+		return imie;
+	}
+
+	public String getNazwisko() {
+		return nazwisko;
+	}
+
+	public String getData() {
+		return data;
 	}
 
 	public void setSaldo(double saldo) {
@@ -32,6 +49,7 @@ public class KartaPlatnicza {
 		this.saldo = saldo;
 		
 		date = new Date();
+		dataStworzenia = date.toString();
 		 c = Calendar.getInstance();
 		c.setTime(date);
 		c.add(Calendar.YEAR, 2);
@@ -55,5 +73,9 @@ public class KartaPlatnicza {
 	
 	public Date getDate() {
 		return date;
+	}
+
+	public String getDataStworzenia() {
+		return dataStworzenia;
 	}
 }
