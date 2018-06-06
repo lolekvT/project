@@ -19,7 +19,10 @@ public class CentrumObslugi {
 		this.listaKlientowCentrum = listaKlientowCentrum;
 	}
 	
-	
+	public void dodaj(KlientCentrum klientcentrum) {
+		
+		listaKlientowCentrum.add(klientcentrum);
+	}
 	
 
 	

@@ -38,10 +38,14 @@ public class KlientCentrum extends Banki {
 						&& banki.listaBankow.get(i).listaKartKlientow.get(j).date.after(dataAutoryzacji)){
 						flaga = true;
 						kartaplatnicza.zaplac(nrKonta, kwota);
+						this.saldo += kwota;
 				}
 			}
 		}
 		return flaga;
+	}
+	public double getSaldo() {
+		return saldo;
 	}
 	
 }

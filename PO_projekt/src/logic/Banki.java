@@ -21,4 +21,7 @@ public class Banki {
 	public void dodaj(Bank bank) {
 		listaBankow.add(bank);
 	}
+	public void usun(Bank bank) {
+		listaBankow.remove(bank);
+	}
 }
