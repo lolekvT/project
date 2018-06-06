@@ -1,10 +1,11 @@
 package logic;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Banki {
 
-   protected List <Bank>listaBankow = new ArrayList<>();
+   protected List <Bank>listaBankow = new LinkedList<>();
    
 
    public Banki(){};

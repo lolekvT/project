@@ -1,12 +1,12 @@
 package logic;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Klient {
 	
 	private KartaPlatnicza kartaplatnicza;
-	private List <KartaPlatnicza>listaKartKlientow = new ArrayList<>();
+	private List <KartaPlatnicza>listaKartKlientow = new LinkedList<>();
 	
 	public Klient(String nrKonta, String imie, String nazwisko, double  saldo){
 		 kartaplatnicza = new KartaDebetowa(nrKonta, imie, nazwisko, saldo);

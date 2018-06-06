@@ -1,10 +1,10 @@
 package logic;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Bank {
 
-	protected List <KartaPlatnicza>listaKartKlientow = new ArrayList<>();
+	protected List <KartaPlatnicza>listaKartKlientow = new LinkedList<>();
 	protected String nazwa;
 	
 	public List<KartaPlatnicza> getKartyKlientow() {

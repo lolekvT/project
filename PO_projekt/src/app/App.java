@@ -36,8 +36,8 @@ public class App {
 		bank.dodajKlienta(klient1.getKartaPlatnicza());
 		System.out.println("saldo klienta przed autorzacj¹: "+klient.getKartaPlatnicza().getSaldo());
 		
-		if(sklep.Autoryzuj(banki, 20.0,"156987",klient.getKartaPlatnicza()) == true)
-			System.out.println("Udana Autoryzacja");
+		if(sklep.Autoryzuj(banki, 20.0,"156987","148654") == true) 
+			System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki banki, int kwota, String nrKonta:KlientaCentrum, String nrKonta)
 		else
 			System.out.println("Nieudana Autoryzacja");
 		System.out.println("saldo klienta po autoryzacji: "+klient.getKartaPlatnicza().getSaldo());
@@ -114,32 +114,50 @@ public class App {
 				else System.out.println("Nie rozumiem");
 				break;
 			case("6"):
-				System.out.println("Podaj nazwê");
-				answer = input.nextLine();
-				
-				for(Bank i : banki.getListaBankow())
-				{
-					if(i.getNazwa().equals(answer))
-						banki.usun(i);
-					}
+					System.out.println("Podaj nazwê");
+					answer = input.nextLine();
+					
+					for(Bank i : banki.getListaBankow())
+					{
+						if(i.getNazwa().equals(answer))
+							banki.usun(i);
+						}
 					break;
 			case("5"):
-				System.out.println("Podaj nazwê");
-				answer = input.nextLine();
-				Bank b = new Bank(answer);
-				banki.dodaj(b);
-				break;
+					System.out.println("Podaj nazwê");
+					answer = input.nextLine();
+					Bank b = new Bank(answer);
+					banki.dodaj(b);
+					break;
 			case("4"):
-				System.out.println("Podaj nazwê");
-				answer = input.nextLine();
-				for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum() )
-				{
-					if(i.getNazwa().equals(answer))
-						centrumobslugi.getListaKlientowCentrum().remove(i);
-					}
-				break;
+					System.out.println("Podaj nazwê");
+					answer = input.nextLine();
+					for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum() )
+					{
+						if(i.getNazwa().equals(answer))
+							centrumobslugi.getListaKlientowCentrum().remove(i);
+						}
+					break;
 			case("7"):
-				System.out.println("Podaj nazwê swojej firmy");
+					System.out.println("Podaj nazwê swojej firmy");
+					answer = input.nextLine();
+					System.out.println("Podaj nrKonta tranzakcji(klienta)");
+					answer1 = input.nextLine();
+					System.out.println("Podaj kwotê tranzakcji");
+					answer3 = input.nextDouble();
+					Boolean flag =false;
+					
+					for(KlientCentrum i : centrumobslugi.getListaKlientowCentrum() )
+					{
+						if(i.getNazwa().equals(answer))
+							if( i.Autoryzuj(banki, answer3, i.getNrKonta(), answer1) == true ) {
+								System.out.println("Autoryzacja udana");
+								flag = true;
+								break;
+							}
+						}
+					if(flag == false) System.out.println("Autoryzacja nieudana sprawdz dane");
+					
 		}
 			
 	}
