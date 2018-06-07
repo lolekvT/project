@@ -19,7 +19,7 @@ public class App {
 			
 			Object obj = ois.readObject();
 			
-			System.out.println("Wczytano obiekty z pliku");
+			System.out.println("Wczytano obiekty z dysku");
 			ois.close();
 			return (CentrumObslugi) obj;
 		}catch (Exception ex) {
@@ -37,7 +37,7 @@ public class App {
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(centrum);
 			
-			System.out.println("Zapisano!");
+			System.out.println("Zapisano obiekty na dysk!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -67,7 +67,9 @@ public class App {
 		double answer3;
 		
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO DZIALAJACA APLIKACJA
-		CentrumObslugi centrumobslugi = loadObjectsFromFile();
+		CentrumObslugi centrumobslugi = new CentrumObslugi();
+		
+		//centrumobslugi = loadObjectsFromFile();
 		
 		Banki banki = new Banki();
 		Bank bank = new Bank("BZWBK");
@@ -106,8 +108,11 @@ public class App {
 		System.out.println("6) Usun bank");
 		System.out.println("7) Obs³u¿ ¿¹danie autoryzacji");
 		System.out.println("8) Przeszukaj archiwum");
-		System.out.println("9) Zapisz stan systemu na dysk");
 		System.out.println("10) Wyswietl karty platnicze w systemie");
+
+		System.out.println("11) Zapisz stan systemu na dysk");
+		System.out.println("12) Wczytaj stan systemy z dysku");
+		System.out.println("13) Wczytaj przykladowe dane systemu");
 		
 		
 		while(true) {
@@ -211,15 +216,19 @@ public class App {
 							}
 						}
 					if(flag == false) System.out.println("Autoryzacja nieudana sprawdz dane");
-			case("9"):
-				saveObjectsToFile(centrumobslugi);
+			
 			case("10"):
 					for(Bank i : banki.getListaBankow()) {
 						for(KartaPlatnicza j : i.getKartyKlientow())
 							System.out.printf("%-15s%-15s%-15s%-15.2f%-15s\n", j.getNrKonta(), j.getImie(), j.getNazwisko(),
 									j.getSaldo(),j.getData());
 					}
-					
+			case("11"):
+				saveObjectsToFile(centrumobslugi);
+				break;
+			case("12"):
+				centrumobslugi = loadObjectsFromFile();
+				break;
 		}
 			
 	}
