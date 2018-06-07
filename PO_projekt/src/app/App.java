@@ -68,33 +68,9 @@ public class App {
 		
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO DZIALAJACA APLIKACJA
 		CentrumObslugi centrumobslugi = new CentrumObslugi();
+		Banki banki = new Banki();
 		
 		//centrumobslugi = loadObjectsFromFile();
-		
-		Banki banki = new Banki();
-		Bank bank = new Bank("BZWBK");
-		banki.dodaj(bank);
-		
-		Sklep sklep = new Sklep("ABC", "156987");
-		Zaklad zaklad = new Zaklad("Fryzjek Maciek","469877");
-		centrumobslugi.dodaj(sklep);
-		centrumobslugi.dodaj(zaklad);
-		
-		//KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
-		
-		Klient klient = new Klient("148654","Jan","Kowalski",100.0);
-		Klient klient1 = new Klient("151654","Zbigniew","Kowalski",100.0);
-		
-		bank.dodajKlienta(klient.getKartaPlatnicza());
-		bank.dodajKlienta(klient1.getKartaPlatnicza());
-		System.out.println("saldo klienta przed autorzacj¹: "+klient.getKartaPlatnicza().getSaldo());
-		
-		if(sklep.Autoryzuj(banki, 20.0,"156987","148654") == true) 
-			System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki banki, int kwota, String nrKonta:KlientaCentrum, String nrKonta)
-		else
-			System.out.println("Nieudana Autoryzacja");
-		System.out.println("saldo klienta po autoryzacji: "+klient.getKartaPlatnicza().getSaldo());
-		System.out.println(sklep.getSaldo());
 			
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//                       PRZYKLADOWA KONSOLA
@@ -229,6 +205,32 @@ public class App {
 			case("12"):
 				centrumobslugi = loadObjectsFromFile();
 				break;
+			case("13"):
+				Bank bank = new Bank("BZWBK");
+				banki.dodaj(bank);
+				
+				Sklep sklep = new Sklep("ABC", "156987");
+				Zaklad zaklad = new Zaklad("Fryzjek Maciek","469877");
+				centrumobslugi.dodaj(sklep);
+				centrumobslugi.dodaj(zaklad);
+				
+				//KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
+				
+				Klient klient = new Klient("148654","Jan","Kowalski",100.0);
+				Klient klient1 = new Klient("151654","Zbigniew","Kowalski",100.0);
+				
+				bank.dodajKlienta(klient.getKartaPlatnicza());
+				bank.dodajKlienta(klient1.getKartaPlatnicza());
+				System.out.println("saldo klienta przed autorzacj¹: "+klient.getKartaPlatnicza().getSaldo());
+				
+				if(sklep.Autoryzuj(banki, 20.0,"156987","148654") == true) 
+					System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki banki, int kwota, String nrKonta:KlientaCentrum, String nrKonta)
+				else
+					System.out.println("Nieudana Autoryzacja");
+				System.out.println("saldo klienta po autoryzacji: "+klient.getKartaPlatnicza().getSaldo());
+				System.out.println(sklep.getSaldo());
+				break;
+				
 		}
 			
 	}
