@@ -1,18 +1,19 @@
 package logic;
 
 public class KartaBankowa extends KartaPlatnicza {
+	private static final long serialVersionUID = 1L;
 
-	public KartaBankowa(String nrKonta, String imie, String nazwisko, double saldo)
-	{
+	public KartaBankowa(String nrKonta, String imie, String nazwisko, double saldo) {
 		super(nrKonta, imie, nazwisko, saldo);
 	}
-	
-	public boolean czyMoznaZaplacic(String nrKonta, double kwota){
+
+	@Override
+	public boolean czyMoznaZaplacic(String nrKonta, double kwota) {
 		return false;
 	}
-	
-	public boolean zaplac(String nrKonta, double kwota)
-	{
+
+	@Override
+	public boolean zaplac(String nrKonta, double kwota) {
 		return czyMoznaZaplacic(nrKonta, kwota);
 	}
 }

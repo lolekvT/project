@@ -8,7 +8,16 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import logic.*;
+
+import logic.Bank;
+import logic.Banki;
+import logic.CentrumObslugi;
+import logic.Firma;
+import logic.KartaPlatnicza;
+import logic.Klient;
+import logic.KlientCentrum;
+import logic.Sklep;
+import logic.Zaklad;
 
 public class App {
 
@@ -63,30 +72,27 @@ public class App {
 		}
 	}
 
-	public static void searchOR(CentrumObslugi centrum, String firma, String bank, String numerKarty, String klient, String kwota) {
+	public static void searchOR(CentrumObslugi centrum, String firma, String bank, String numerKarty, String klient,
+			String kwota) {
 		List<Object> listaWynikow = new LinkedList<>();
-		
-		if(firma != null) {
-			for(Object obj : centrum.getListaKlientowCentrum() ) {
-				if(((KlientCentrum) obj).getNazwa()==firma) {
+
+		if (firma != null) {
+			for (Object obj : centrum.getListaKlientowCentrum()) {
+				if (((KlientCentrum) obj).getNazwa() == firma) {
 					listaWynikow.add(obj);
 				}
 			}
 		}
-		
-		for(centrum obj:)
 
-			https://stackoverflow.com/questions/33746195/searching-a-hashmap-for-multiple-values
-				https://www.eclipse.org/windowbuilder/
-			
-		//Wypisz wyniki na ekran
-		for(Object obj : listaWynikow) {
+		// Wypisz wyniki na ekran
+		for (Object obj : listaWynikow) {
 			System.out.println(obj);
 		}
 	}
 
 	public static void main(String[] args) {
 
+		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		String answer;
 		String answer1;
