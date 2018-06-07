@@ -12,7 +12,7 @@ public class App {
 		Scanner input = new Scanner(System.in);
 		String answer;
 		String answer1;
-		String answer2;
+		//String answer2;
 		double answer3;
 		
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO DZIALAJACA APLIKACJA
@@ -73,7 +73,7 @@ public class App {
 				for(Bank i : banki.getListaBankow())
 				{
 					//System.out.println(i.getNazwa());
-					System.out.printf("%-17s\t %d \t%s", i.getNazwa(),i.getRozmiarListyKlientow(), i.getDataStworzenia());
+					System.out.printf("%-17s\t %d \t%s\n", i.getNazwa(),i.getRozmiarListyKlientow(), i.getDataStworzenia());
 				}
 			break;
 			case("3"):
