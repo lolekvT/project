@@ -11,9 +11,10 @@ import logic.*;
 
 public class App {
 	
-	//Katalog musi istniec na dysku twardym przed proba load / save 
-	public static String saveCentrumPath = "c:\\temp\\centrum.ser";
-	public static String saveBankiPath = "c:\\temp\\banki.ser";
+	//Pliki musza stniec na dysku twardym przed load 
+	public static String saveDir = "c:\\temp\\";
+	public static String saveCentrumPath = saveDir+"centrum.ser";
+	public static String saveBankiPath = saveDir+"banki.ser";
 	
 	public static Object loadObjectsFromFile(String path) {
 		try {
@@ -22,7 +23,7 @@ public class App {
 			
 			Object obj = ois.readObject();
 			
-			System.out.println("Wczytano obiekty z pliku: "+path);
+			System.out.println("Wczytano obiekty("+obj.getClass().getName()+") z pliku: "+path);
 			ois.close();
 			return obj;
 		}catch (Exception ex) {
