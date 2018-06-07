@@ -4,6 +4,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 import logic.*;
 
@@ -58,6 +60,25 @@ public class App {
 			}
 		}
 	}
+	
+	public static void searchOR(CentrumObslugi centrum, String firma, String bank, String numerKarty, String klient, String kwota) {
+		List<Object> listaWynikow = new LinkedList<>();
+		
+		if(firma != null) {
+			for(Object obj : centrum.getListaKlientowCentrum() ) {
+				if(((KlientCentrum) obj).getNazwa()==firma) {
+					listaWynikow.add(obj);
+				}
+			}
+		}
+
+		//Wypisz wyniki na ekran
+		for(Object obj : listaWynikow) {
+			System.out.println(obj);
+		}
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
@@ -199,6 +220,10 @@ public class App {
 							System.out.printf("%-15s%-15s%-15s%-15.2f%-15s\n", j.getNrKonta(), j.getImie(), j.getNazwisko(),
 									j.getSaldo(),j.getData());
 					}
+			
+			case("8"):
+				searchOR(centrumobslugi,"ABC","","","","");
+				break;
 			case("11"):
 				saveObjectsToFile(centrumobslugi);
 				break;

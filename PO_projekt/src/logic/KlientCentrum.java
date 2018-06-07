@@ -57,4 +57,8 @@ public class KlientCentrum extends Banki {
 		return saldo;
 	}
 	
+	public String toString() {
+		return "Nazwa: "+getNazwa() + " Konto: " + getNrKonta() + " Data dolaczenia: "+ getDataDolaczenia();
+	}
+	
 }
