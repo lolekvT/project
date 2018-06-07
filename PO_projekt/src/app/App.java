@@ -1,9 +1,42 @@
 package app;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import logic.*;
 
 public class App {
 
+	public static void serializeObject(CentrumObslugi centrum) {
+		FileOutputStream fout = null;
+		ObjectOutputStream oos = null;
+		
+		try {
+			fout = new FileOutputStream("c:\\temp\\bank.ser");
+			oos = new ObjectOutputStream(fout);
+			oos.writeObject(centrum);
+			
+			System.out.println("Zapisano!");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			if (fout != null) {
+				try {
+					fout.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (oos != null) {
+				try {
+					oos.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	public static void main(String[] args) {
 		
 		Scanner input = new Scanner(System.in);
@@ -157,6 +190,8 @@ public class App {
 							}
 						}
 					if(flag == false) System.out.println("Autoryzacja nieudana sprawdz dane");
+			case("9"):
+				serializeObject(centrumobslugi);
 			case("10"):
 					for(Bank i : banki.getListaBankow()) {
 						for(KartaPlatnicza j : i.getKartyKlientow())

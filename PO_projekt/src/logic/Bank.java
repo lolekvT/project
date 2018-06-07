@@ -1,9 +1,10 @@
 package logic;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Bank {
+public class Bank implements Serializable{
 
 	protected List <KartaPlatnicza>listaKartKlientow = new LinkedList<>();
 	protected String nazwa;

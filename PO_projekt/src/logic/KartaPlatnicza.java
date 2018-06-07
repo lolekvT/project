@@ -1,9 +1,10 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class KartaPlatnicza {
+public class KartaPlatnicza implements Serializable{
 	
 	protected String nrKonta;
 	protected String imie;

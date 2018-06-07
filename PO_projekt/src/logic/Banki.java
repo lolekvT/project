@@ -1,9 +1,10 @@
 package logic;
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Banki {
+public class Banki implements Serializable{
 
    protected List <Bank>listaBankow = new LinkedList<>();
    

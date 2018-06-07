@@ -1,10 +1,11 @@
 package logic;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class CentrumObslugi {
+public class CentrumObslugi implements Serializable{
 
 	//List <Sklep>listaSklepow = new ArrayList<>();
 	//List <Firma>listaFirm = new ArrayList<>();
