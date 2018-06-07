@@ -12,34 +12,35 @@ import logic.*;
 public class App {
 	
 	//Katalog musi istniec na dysku twardym przed proba load / save 
-	public static String savePath = "c:\\temp\\bank.ser";
+	public static String saveCentrumPath = "c:\\temp\\centrum.ser";
+	public static String saveBankiPath = "c:\\temp\\banki.ser";
 	
-	public static CentrumObslugi loadObjectsFromFile() {
+	public static Object loadObjectsFromFile(String path) {
 		try {
-			FileInputStream fin = new FileInputStream(savePath);
+			FileInputStream fin = new FileInputStream(path);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			
 			Object obj = ois.readObject();
 			
-			System.out.println("Wczytano obiekty z dysku");
+			System.out.println("Wczytano obiekty z pliku: "+path);
 			ois.close();
-			return (CentrumObslugi) obj;
+			return obj;
 		}catch (Exception ex) {
 			ex.printStackTrace();
 			return null;
 		}
 	}
 
-	public static void saveObjectsToFile(CentrumObslugi centrum) {
+	public static void saveObjectsToFile(Object saveObj, String path) {
 		FileOutputStream fout = null;
 		ObjectOutputStream oos = null;
 		
 		try {
-			fout = new FileOutputStream(savePath);
+			fout = new FileOutputStream(path);
 			oos = new ObjectOutputStream(fout);
-			oos.writeObject(centrum);
+			oos.writeObject(saveObj);
 			
-			System.out.println("Zapisano obiekty na dysk!");
+			System.out.println("Zapisano obiekty ("+saveObj.getClass().getName()+") do pliku: "+path);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
@@ -225,10 +226,12 @@ public class App {
 				searchOR(centrumobslugi,"ABC","","","","");
 				break;
 			case("11"):
-				saveObjectsToFile(centrumobslugi);
+				saveObjectsToFile(centrumobslugi,saveCentrumPath);
+				saveObjectsToFile(banki, saveBankiPath);
 				break;
 			case("12"):
-				centrumobslugi = loadObjectsFromFile();
+				centrumobslugi = (CentrumObslugi)loadObjectsFromFile(saveCentrumPath);
+				banki = (Banki)loadObjectsFromFile(saveBankiPath);
 				break;
 			case("13"):
 				Bank bank = new Bank("BZWBK");
