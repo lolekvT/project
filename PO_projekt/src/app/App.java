@@ -1,18 +1,39 @@
 package app;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import logic.*;
 
 public class App {
+	
+	//Katalog musi istniec na dysku twardym przed proba load / save 
+	public static String savePath = "c:\\temp\\bank.ser";
+	
+	public static CentrumObslugi loadObjectsFromFile() {
+		try {
+			FileInputStream fin = new FileInputStream(savePath);
+			ObjectInputStream ois = new ObjectInputStream(fin);
+			
+			Object obj = ois.readObject();
+			
+			System.out.println("Wczytano obiekty z pliku");
+			ois.close();
+			return (CentrumObslugi) obj;
+		}catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
 
-	public static void serializeObject(CentrumObslugi centrum) {
+	public static void saveObjectsToFile(CentrumObslugi centrum) {
 		FileOutputStream fout = null;
 		ObjectOutputStream oos = null;
 		
 		try {
-			fout = new FileOutputStream("c:\\temp\\bank.ser");
+			fout = new FileOutputStream(savePath);
 			oos = new ObjectOutputStream(fout);
 			oos.writeObject(centrum);
 			
@@ -46,7 +67,7 @@ public class App {
 		double answer3;
 		
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO DZIALAJACA APLIKACJA
-		CentrumObslugi centrumobslugi = new CentrumObslugi();
+		CentrumObslugi centrumobslugi = loadObjectsFromFile();
 		
 		Banki banki = new Banki();
 		Bank bank = new Bank("BZWBK");
@@ -191,7 +212,7 @@ public class App {
 						}
 					if(flag == false) System.out.println("Autoryzacja nieudana sprawdz dane");
 			case("9"):
-				serializeObject(centrumobslugi);
+				saveObjectsToFile(centrumobslugi);
 			case("10"):
 					for(Bank i : banki.getListaBankow()) {
 						for(KartaPlatnicza j : i.getKartyKlientow())
