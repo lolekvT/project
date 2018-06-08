@@ -3,8 +3,8 @@ package logic;
 public class KartaKredytowa extends KartaPlatnicza {
 	private static final long serialVersionUID = 1L;
 
-	KartaKredytowa(String nrKonta, String imie, String nazwisko, double saldo, String id) {
-		super(nrKonta, imie, nazwisko, saldo, id);
+	KartaKredytowa(String nrKonta, String imie, String nazwisko, double saldo) {
+		super(nrKonta, imie, nazwisko, saldo);
 	}
 
 	@Override

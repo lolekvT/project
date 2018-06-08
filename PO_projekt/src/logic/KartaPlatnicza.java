@@ -42,7 +42,7 @@ public class KartaPlatnicza implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public KartaPlatnicza(String nrKonta, String imie, String nazwisko, double saldo, String id) {
+	public KartaPlatnicza(String nrKonta, String imie, String nazwisko, double saldo) {
 		this.nrKonta = nrKonta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
@@ -58,6 +58,17 @@ public class KartaPlatnicza implements Serializable {
 		data = date.toString();
 
 	}
+	
+	public KartaPlatnicza() {
+		this.nrKonta = "986566";
+		this.imie = "JAn";
+		this.nazwisko = "Nowak";
+		this.saldo = 100.00;
+		this.id = "asd";
+
+	}
+	
+	
 
 	public boolean czyMoznaZaplacic(String nrKonta, double kwota) {
 		if (saldo - kwota > 0)

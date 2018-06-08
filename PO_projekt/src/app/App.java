@@ -15,7 +15,6 @@ import logic.CentrumObslugi;
 import logic.Firma;
 import logic.KartaDebetowa;
 import logic.KartaPlatnicza;
-import logic.Klient;
 import logic.KlientCentrum;
 import logic.Sklep;
 import logic.Zaklad;
@@ -97,8 +96,9 @@ public class App {
 		Scanner input = new Scanner(System.in);
 		String answer;
 		String answer1;
-		// String answer2;
+		String answer2;
 		double answer3;
+		String answer4;
 
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO
 		/////////////////////////////////////////////////////////////////////// DZIALAJACA
@@ -233,6 +233,7 @@ public class App {
 					for (KartaPlatnicza j : i.getKartyKlientow())
 						System.out.printf("%-15s%-15s%-15s%-15.2f%-15s\n", j.getNrKonta(), j.getImie(), j.getNazwisko(),
 								j.getSaldo(), j.getData());
+					break;
 				}
 			case ("8"):
 					searchOR(centrumobslugi, "ABC", "", "", "", "");
@@ -253,41 +254,83 @@ public class App {
 					Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
 					centrumobslugi.dodaj(sklep);
 					centrumobslugi.dodaj(zaklad);
+					
+					KartaDebetowa kartadebetowa = new KartaDebetowa("123654", "Joanna", "Krawczyk", 100.0);
+					KartaDebetowa kartadebetowa1 = new KartaDebetowa("123656", "Adam", "Malysz", 1000.0);
+					KartaDebetowa kartadebetowa2 = new KartaDebetowa("567896", "Jan", "Destrojer", 100000.0);
+					
 	
-					// KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
+					bank.dodajKarteKlienta(kartadebetowa);
+					bank.dodajKarteKlienta(kartadebetowa1);
+					bank.dodajKarteKlienta(kartadebetowa2);
+					System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
 	
-					Klient klient = new Klient("148654", "Jan", "Kowalski", 100.0, "1234");
-					Klient klient1 = new Klient("151654", "Zbigniew", "Kowalski", 100.0, "1234");
-					KartaPlatnicza kp= new KartaPlatnicza("151654","Zbigniew", "Kowalski", 200.0, "1234");
-					klient1.dodajKarte(kp);
-	
-					bank.dodajKlienta(klient.getKartaPlatnicza());
-					bank.dodajKlienta(klient1.getKartaPlatnicza());
-					System.out.println("saldo klienta przed autorzacj¹: " + klient.getKartaPlatnicza().getSaldo());
-	
-					if (sklep.Autoryzuj(banki, 20.0, "156987", "148654") == true)
+					if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
 						System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
 																	/// banki, int kwota, String nrKonta:KlientaCentrum,
 																	/// String nrKonta)
 					else
 						System.out.println("Nieudana Autoryzacja");
-					System.out.println("saldo klienta po autoryzacji: " + klient.getKartaPlatnicza().getSaldo());
+					System.out.println("saldo klienta po autoryzacji: " + kartadebetowa.getSaldo());
 					System.out.println(sklep.getSaldo());
 					break;
 			case("14"):
-					System.out.println("Podaj id klienta któremu chcesz przypisaæ kartê p³atnicz¹");
-					/*answer = input.nextLine();
-					//KartaPlatnicza kartapaltnicza;
+					System.out.println("Podaj nrkonta, imie, nazwisko, saldo, id, nazwê banku");
+					answer = input.nextLine();
+					System.out.println("Podaj imie");
+					answer1 = input.nextLine();
+					System.out.println("Podaj nazwisko");
+					answer2 = input.nextLine();
+					System.out.println("nazwê banku");
+					answer4 = input.nextLine();
+					boolean flaga = false;
+					System.out.println("saldo");
+					answer3 = input.nextDouble();
+					int m=0;
+					
+					for(Bank i : banki.getListaBankow())
+					{
+						if(i.getNazwa().equals(answer4) ) {
+							
+							for(KartaPlatnicza k : i.getKartyKlientow())
+								if(k.getNrKonta().equals(answer)) {
+									System.out.println("Nr konta zajety");
+									break;
+								}
+								else if(!k.getNrKonta().equals(answer) && flaga == false) {
+								m=banki.getListaBankow().indexOf(i);
+								System.out.println("Dodano kartê platnicz¹");
+								flaga = true;}
+						}
+					}
+					
+					if(flaga == false ) System.out.println("Coœ posz³o nie tak :C");
+					if(flaga == true )  banki.getListaBankow().get(m).dodajKarteKlienta(new KartaDebetowa(answer,answer1,answer2,answer3));
+					
+			
+			
+					break;
+			case ("15"):
+					System.out.println("Podaj numer konta karty p³atniczej któr¹ chcesz usun¹æ");
+					answer = input.nextLine();
+					int kp=0,ba=0;
+					flaga = false;
 					
 					for (Bank i : banki.getListaBankow()) {
-						for (Klient k : i.getListaKlientow())
-							if(k.id.equals(answer)) {
-								k.dodajKarte(new KartaDebetowa(k.)
-								System.out.printf("Pomyslnie dodano kartê p³atnicz¹");
+						for(KartaPlatnicza k : i.getKartyKlientow())
+							if(k.getNrKonta().equals(answer)) { 
+								flaga = true;
+								kp=i.getKartyKlientow().indexOf(k);
+								ba=banki.getListaBankow().indexOf(i);
 							}
-					}*/
-					break;
-
+					}
+					if(flaga = true && banki.getListaBankow().size() != 0) {
+						banki.getListaBankow().get(ba).getKartyKlientow().remove(kp);
+						System.out.println("Usunieto karte p³atnicz¹");}
+					else
+					System.out.println("Nie znaleziono karty o podym numerze konta");	
+				
+				
 			}
 
 		}
