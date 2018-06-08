@@ -22,6 +22,7 @@ import logic.Zaklad;
 public class App {
 
 	// Pliki musza istniec na dysku twardym przed load
+	/// trzeba podzielic maina :/
 	public static String saveDir = "c:\\temp\\";
 	public static String saveCentrumPath = saveDir + "centrum.ser";
 	public static String saveBankiPath = saveDir + "banki.ser";
