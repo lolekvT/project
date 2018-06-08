@@ -8,6 +8,7 @@ public class KartaPlatnicza implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected String nrKonta;
 	protected String imie;
+	public String id;
 	protected String nazwisko;
 	protected String data; // data do kiedy karta jest wazna
 	protected String dataStworzenia;
@@ -41,11 +42,12 @@ public class KartaPlatnicza implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public KartaPlatnicza(String nrKonta, String imie, String nazwisko, double saldo) {
+	public KartaPlatnicza(String nrKonta, String imie, String nazwisko, double saldo, String id) {
 		this.nrKonta = nrKonta;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.saldo = saldo;
+		this.id = id;
 
 		date = new Date();
 		dataStworzenia = date.toString();

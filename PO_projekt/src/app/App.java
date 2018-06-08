@@ -13,6 +13,7 @@ import logic.Bank;
 import logic.Banki;
 import logic.CentrumObslugi;
 import logic.Firma;
+import logic.KartaDebetowa;
 import logic.KartaPlatnicza;
 import logic.Klient;
 import logic.KlientCentrum;
@@ -123,6 +124,9 @@ public class App {
 		System.out.println("11) Zapisz stan systemu na dysk");
 		System.out.println("12) Wczytaj stan systemy z dysku");
 		System.out.println("13) Wczytaj przykladowe dane systemu");
+		System.out.println("14) Dodaj karte platnicza");
+		System.out.println("15) Usun karte platnicza");
+
 
 		while (true) {
 			answer = input.nextLine();
@@ -219,8 +223,10 @@ public class App {
 							break;
 						}
 				}
-				if (flag == false)
+				if (flag == false) {
 					System.out.println("Autoryzacja nieudana sprawdz dane");
+					break;
+					}
 
 			case ("10"):
 				for (Bank i : banki.getListaBankow()) {
@@ -229,43 +235,58 @@ public class App {
 								j.getSaldo(), j.getData());
 				}
 			case ("8"):
-				searchOR(centrumobslugi, "ABC", "", "", "", "");
-				break;
+					searchOR(centrumobslugi, "ABC", "", "", "", "");
+					break;
 			case ("11"):
-				saveObjectsToFile(centrumobslugi, saveCentrumPath);
-				saveObjectsToFile(banki, saveBankiPath);
-				break;
+					saveObjectsToFile(centrumobslugi, saveCentrumPath);
+					saveObjectsToFile(banki, saveBankiPath);
+					break;
 			case ("12"):
-				centrumobslugi = (CentrumObslugi) loadObjectsFromFile(saveCentrumPath);
-				banki = (Banki) loadObjectsFromFile(saveBankiPath);
-				break;
+					centrumobslugi = (CentrumObslugi) loadObjectsFromFile(saveCentrumPath);
+					banki = (Banki) loadObjectsFromFile(saveBankiPath);
+					break;
 			case ("13"):
-				Bank bank = new Bank("BZWBK");
-				banki.dodaj(bank);
-
-				Sklep sklep = new Sklep("ABC", "156987");
-				Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
-				centrumobslugi.dodaj(sklep);
-				centrumobslugi.dodaj(zaklad);
-
-				// KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
-
-				Klient klient = new Klient("148654", "Jan", "Kowalski", 100.0);
-				Klient klient1 = new Klient("151654", "Zbigniew", "Kowalski", 100.0);
-
-				bank.dodajKlienta(klient.getKartaPlatnicza());
-				bank.dodajKlienta(klient1.getKartaPlatnicza());
-				System.out.println("saldo klienta przed autorzacj¹: " + klient.getKartaPlatnicza().getSaldo());
-
-				if (sklep.Autoryzuj(banki, 20.0, "156987", "148654") == true)
-					System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
-																/// banki, int kwota, String nrKonta:KlientaCentrum,
-																/// String nrKonta)
-				else
-					System.out.println("Nieudana Autoryzacja");
-				System.out.println("saldo klienta po autoryzacji: " + klient.getKartaPlatnicza().getSaldo());
-				System.out.println(sklep.getSaldo());
-				break;
+					Bank bank = new Bank("BZWBK");
+					banki.dodaj(bank);
+	
+					Sklep sklep = new Sklep("ABC", "156987");
+					Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
+					centrumobslugi.dodaj(sklep);
+					centrumobslugi.dodaj(zaklad);
+	
+					// KartaPlatnicza kartaplatnicza1 = new KartaPlatnicza("","","",);
+	
+					Klient klient = new Klient("148654", "Jan", "Kowalski", 100.0, "1234");
+					Klient klient1 = new Klient("151654", "Zbigniew", "Kowalski", 100.0, "1234");
+					KartaPlatnicza kp= new KartaPlatnicza("151654","Zbigniew", "Kowalski", 200.0, "1234");
+					klient1.dodajKarte(kp);
+	
+					bank.dodajKlienta(klient.getKartaPlatnicza());
+					bank.dodajKlienta(klient1.getKartaPlatnicza());
+					System.out.println("saldo klienta przed autorzacj¹: " + klient.getKartaPlatnicza().getSaldo());
+	
+					if (sklep.Autoryzuj(banki, 20.0, "156987", "148654") == true)
+						System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
+																	/// banki, int kwota, String nrKonta:KlientaCentrum,
+																	/// String nrKonta)
+					else
+						System.out.println("Nieudana Autoryzacja");
+					System.out.println("saldo klienta po autoryzacji: " + klient.getKartaPlatnicza().getSaldo());
+					System.out.println(sklep.getSaldo());
+					break;
+			case("14"):
+					System.out.println("Podaj id klienta któremu chcesz przypisaæ kartê p³atnicz¹");
+					/*answer = input.nextLine();
+					//KartaPlatnicza kartapaltnicza;
+					
+					for (Bank i : banki.getListaBankow()) {
+						for (Klient k : i.getListaKlientow())
+							if(k.id.equals(answer)) {
+								k.dodajKarte(new KartaDebetowa(k.)
+								System.out.printf("Pomyslnie dodano kartê p³atnicz¹");
+							}
+					}*/
+					break;
 
 			}
 

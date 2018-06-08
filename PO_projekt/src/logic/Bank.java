@@ -9,6 +9,8 @@ public class Bank implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected List<KartaPlatnicza> listaKartKlientow = new LinkedList<>();
+	protected List<Klient> listaKlientow = new LinkedList<>();
+	
 	protected String nazwa;
 	private String dataStworzenia;
 
@@ -43,5 +45,9 @@ public class Bank implements Serializable {
 
 	public int getRozmiarListyKlientow() {
 		return listaKartKlientow.size();
+	}
+
+	public List<Klient> getListaKlientow() {
+		return listaKlientow;
 	}
 }
