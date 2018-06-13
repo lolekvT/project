@@ -36,4 +36,17 @@ public class CentrumObslugi implements Serializable {
 		return listaWynikow;
 	}
 
+	public List<Object> znajdzKlientow(String nazwaFirmy, String nazwaBanku, String imie, String nazwisko, Double kwota,
+			String nrKonta) {
+		List<Object> listaWynikow = new LinkedList<>();
+
+		for (KlientCentrum obj : listaKlientowCentrum) {
+			if (obj.getNazwa().toLowerCase().equals(nazwaFirmy.toLowerCase())) {
+				listaWynikow.addAll(obj.znajdzKlientow(nazwaBanku, imie, nazwisko, kwota, nrKonta));
+			}
+		}
+
+		return listaWynikow;
+	}
+
 }

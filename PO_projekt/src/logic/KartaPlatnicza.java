@@ -92,7 +92,7 @@ public class KartaPlatnicza implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nr Konta: " + getNrKonta() + " Imie: " + getImie() + " Nazwisko: " + getNazwisko()
-				+ " Data Stworzenia: " + getDataStworzenia();
+		return "Nr Konta: " + getNrKonta() + " Imie: " + getImie() + " Nazwisko: " + getNazwisko() + " Saldo: "
+				+ getSaldo() + " Data Stworzenia: " + getDataStworzenia();
 	}
 }

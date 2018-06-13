@@ -40,6 +40,25 @@ public class Banki implements Serializable {
 		return listaWynikow;
 	}
 
+	public List<KartaPlatnicza> znajdzKlientow(String nazwaBanku, String imie, String nazwisko, Double kwota,
+			String nrKonta) {
+		List<KartaPlatnicza> listaWynikow = new LinkedList<>();
+		List<KartaPlatnicza> listaKartKlientow;
+
+		for (Bank bank : znajdzBanki(nazwaBanku)) {
+			listaKartKlientow = bank.getKartyKlientow();
+			for (KartaPlatnicza obj : listaKartKlientow) {
+				if (obj.getImie().toLowerCase().equals(imie.toLowerCase())
+						&& obj.getNazwisko().toLowerCase().equals(nazwisko.toLowerCase()) && obj.getSaldo() == kwota
+						&& obj.getNrKonta().equals(nrKonta)) {
+					listaWynikow.add(obj);
+				}
+			}
+		}
+
+		return listaWynikow;
+	}
+
 	public List<KartaPlatnicza> znajdzKlientow(String imie, String nazwisko) {
 		List<KartaPlatnicza> listaWynikow = new LinkedList<>();
 		List<KartaPlatnicza> listaKartKlientow;
@@ -56,4 +75,37 @@ public class Banki implements Serializable {
 
 		return listaWynikow;
 	}
+
+	public List<KartaPlatnicza> znajdzKlientow(Double kwota) {
+		List<KartaPlatnicza> listaWynikow = new LinkedList<>();
+		List<KartaPlatnicza> listaKartKlientow;
+
+		for (Bank bank : listaBankow) {
+			listaKartKlientow = bank.getKartyKlientow();
+			for (KartaPlatnicza obj : listaKartKlientow) {
+				if (obj.getSaldo() == kwota) {
+					listaWynikow.add(obj);
+				}
+			}
+		}
+
+		return listaWynikow;
+	}
+
+	public List<KartaPlatnicza> znajdzKlientow(String nrKonta) {
+		List<KartaPlatnicza> listaWynikow = new LinkedList<>();
+		List<KartaPlatnicza> listaKartKlientow;
+
+		for (Bank bank : listaBankow) {
+			listaKartKlientow = bank.getKartyKlientow();
+			for (KartaPlatnicza obj : listaKartKlientow) {
+				if (obj.getNrKonta().equals(nrKonta)) {
+					listaWynikow.add(obj);
+				}
+			}
+		}
+
+		return listaWynikow;
+	}
+
 }

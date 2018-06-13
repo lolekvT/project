@@ -74,18 +74,27 @@ public class App {
 	}
 
 	public static void searchOR(CentrumObslugi centrum, Banki banki, String firma, String bank, String imieKlienta,
-			String nazwiskoKlienta, String numerKarty, String kwota) {
+			String nazwiskoKlienta, String numerKonta, Double kwota, int typWyszukania) {
 		List<Object> listaWynikow = new LinkedList<>();
 
-		listaWynikow.addAll(centrum.znajdzKlientow(firma));
-		listaWynikow.addAll(banki.znajdzBanki(bank));
-		listaWynikow.addAll(banki.znajdzKlientow(imieKlienta, nazwiskoKlienta));
+		switch (typWyszukania) {
+		case 1:
+			listaWynikow.addAll(centrum.znajdzKlientow(firma, bank, imieKlienta, nazwiskoKlienta, kwota, numerKonta));
+			break;
+		default:
+			listaWynikow.addAll(centrum.znajdzKlientow(firma));
+			listaWynikow.addAll(banki.znajdzBanki(bank));
+			listaWynikow.addAll(banki.znajdzKlientow(imieKlienta, nazwiskoKlienta));
+			listaWynikow.addAll(banki.znajdzKlientow(kwota));
+			listaWynikow.addAll(banki.znajdzKlientow(numerKonta));
+			break;
+		}
 
-		// Wypisz wyniki na ekran
 		System.out.println("Lista wynikow:");
 		for (Object obj : listaWynikow) {
 			System.out.println(obj);
 		}
+
 	}
 
 	public static void main(String[] args) {
@@ -230,7 +239,7 @@ public class App {
 				}
 				break;
 			case ("8"):
-				searchOR(centrumobslugi, banki, "ABC", "BZWBK", "Jan", "Kowalski", "", "");
+				searchOR(centrumobslugi, banki, "ABC", "BZWBK", "Jan", "Kowalski", "151654", 100.0, 0);
 				break;
 			case ("11"):
 				saveObjectsToFile(centrumobslugi, saveCentrumPath);
