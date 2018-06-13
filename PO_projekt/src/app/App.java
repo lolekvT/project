@@ -22,7 +22,6 @@ import logic.Zaklad;
 public class App {
 
 	// Pliki musza istniec na dysku twardym przed load
-	/// trzeba podzielic maina :/
 	public static String saveDir = "c:\\temp\\";
 	public static String saveCentrumPath = saveDir + "centrum.ser";
 	public static String saveBankiPath = saveDir + "banki.ser";
@@ -79,7 +78,7 @@ public class App {
 
 		switch (typWyszukania) {
 		case 1:
-			listaWynikow.addAll(centrum.znajdzKlientow(firma, bank, imieKlienta, nazwiskoKlienta, kwota, numerKonta));
+			listaWynikow.addAll(banki.znajdzKlientow(bank, imieKlienta, nazwiskoKlienta, kwota, numerKonta));
 			break;
 		default:
 			listaWynikow.addAll(centrum.znajdzKlientow(firma));
@@ -239,7 +238,7 @@ public class App {
 				}
 				break;
 			case ("8"):
-				searchOR(centrumobslugi, banki, "ABC", "BZWBK", "Jan", "Kowalski", "151654", 100.0, 0);
+				searchOR(centrumobslugi, banki, "ABC", "BZWBK", "Zbigniew", "Kowalski", "151654", 100.0, 1);
 				break;
 			case ("11"):
 				saveObjectsToFile(centrumobslugi, saveCentrumPath);
