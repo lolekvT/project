@@ -10,7 +10,7 @@ public class KartaPlatnicza implements Serializable {
 	protected String imie;
 	public String id;
 	protected String nazwisko;
-	protected String data; // data do kiedy karta jest wazna
+	protected String data;
 	protected String dataStworzenia;
 	protected Date date;
 	Calendar c;
@@ -47,7 +47,6 @@ public class KartaPlatnicza implements Serializable {
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.saldo = saldo;
-		this.id = id;
 
 		date = new Date();
 		dataStworzenia = date.toString();
