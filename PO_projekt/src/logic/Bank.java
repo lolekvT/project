@@ -9,8 +9,7 @@ public class Bank implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	protected List<KartaPlatnicza> listaKartKlientow = new LinkedList<>();
-	
-	
+
 	protected String nazwa;
 	private String dataStworzenia;
 
@@ -34,16 +33,16 @@ public class Bank implements Serializable {
 		this.nazwa = nazwa;
 		dataStworzenia = new Date().toString();
 	}
+
 	public Bank(Bank bank) {
 		this.nazwa = bank.nazwa;
 		dataStworzenia = bank.dataStworzenia;
 	}
-	
+
 	public Bank() {
 		this.nazwa = "";
 		dataStworzenia = new Date().toString();
 	}
-
 
 	public void dodajKarteKlienta(KartaPlatnicza kartaPlatnicza) {
 		listaKartKlientow.add(kartaPlatnicza);
@@ -55,6 +54,12 @@ public class Bank implements Serializable {
 
 	public int getRozmiarListyKlientow() {
 		return listaKartKlientow.size();
+	}
+
+	@Override
+	public String toString() {
+		return "Nazwa: " + getNazwa() + " Data stworzenia: " + getDataStworzenia() + " Liczba klientow: "
+				+ getRozmiarListyKlientow();
 	}
 
 }

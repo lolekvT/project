@@ -73,19 +73,16 @@ public class App {
 		}
 	}
 
-	public static void searchOR(CentrumObslugi centrum, String firma, String bank, String numerKarty, String klient,
-			String kwota) {
+	public static void searchOR(CentrumObslugi centrum, Banki banki, String firma, String bank, String imieKlienta,
+			String nazwiskoKlienta, String numerKarty, String kwota) {
 		List<Object> listaWynikow = new LinkedList<>();
 
-		if (firma != null) {
-			for (Object obj : centrum.getListaKlientowCentrum()) {
-				if (((KlientCentrum) obj).getNazwa() == firma) {
-					listaWynikow.add(obj);
-				}
-			}
-		}
+		listaWynikow.addAll(centrum.znajdzKlientow(firma));
+		listaWynikow.addAll(banki.znajdzBanki(bank));
+		listaWynikow.addAll(banki.znajdzKlientow(imieKlienta, nazwiskoKlienta));
 
 		// Wypisz wyniki na ekran
+		System.out.println("Lista wynikow:");
 		for (Object obj : listaWynikow) {
 			System.out.println(obj);
 		}
@@ -128,7 +125,6 @@ public class App {
 		System.out.println("14) Dodaj karte platnicza");
 		System.out.println("15) Usun karte platnicza");
 
-
 		while (true) {
 			answer = input.nextLine();
 			switch (answer) {
@@ -156,11 +152,8 @@ public class App {
 					System.out.println("Podaj nrKonta");
 					answer1 = input.nextLine();
 					Sklep s = new Sklep(answer, answer1);
-					// lsklepy.add(s);
-					centrumobslugi.getListaKlientowCentrum().add(s);
-
+					centrumobslugi.dodaj(s);
 					break;
-
 				}
 				if (answer.equals("2")) {
 					System.out.println("Podaj nazwê");
@@ -227,111 +220,109 @@ public class App {
 				if (flag == false) {
 					System.out.println("Autoryzacja nieudana sprawdz dane");
 					break;
-					}
+				}
 
 			case ("10"):
 				for (Bank i : banki.getListaBankow()) {
 					for (KartaPlatnicza j : i.getKartyKlientow())
 						System.out.printf("%-15s%-15s%-15s%-15.2f%-15s\n", j.getNrKonta(), j.getImie(), j.getNazwisko(),
 								j.getSaldo(), j.getData());
-					break;
 				}
+				break;
 			case ("8"):
-					searchOR(centrumobslugi, "ABC", "", "", "", "");
-					break;
+				searchOR(centrumobslugi, banki, "ABC", "BZWBK", "Jan", "Kowalski", "", "");
+				break;
 			case ("11"):
-					saveObjectsToFile(centrumobslugi, saveCentrumPath);
-					saveObjectsToFile(banki, saveBankiPath);
-					break;
+				saveObjectsToFile(centrumobslugi, saveCentrumPath);
+				saveObjectsToFile(banki, saveBankiPath);
+				break;
 			case ("12"):
-					centrumobslugi = (CentrumObslugi) loadObjectsFromFile(saveCentrumPath);
-					banki = (Banki) loadObjectsFromFile(saveBankiPath);
-					break;
+				centrumobslugi = (CentrumObslugi) loadObjectsFromFile(saveCentrumPath);
+				banki = (Banki) loadObjectsFromFile(saveBankiPath);
+				break;
 			case ("13"):
-					Bank bank = new Bank("BZWBK");
-					banki.dodaj(bank);
-	
-					Sklep sklep = new Sklep("ABC", "156987");
-					Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
-					centrumobslugi.dodaj(sklep);
-					centrumobslugi.dodaj(zaklad);
-					
-					KartaDebetowa kartadebetowa = new KartaDebetowa("123654", "Joanna", "Krawczyk", 100.0);
-					KartaDebetowa kartadebetowa1 = new KartaDebetowa("123656", "Adam", "Malysz", 1000.0);
-					KartaDebetowa kartadebetowa2 = new KartaDebetowa("567896", "Jan", "Destrojer", 100000.0);
-					
-	
-					bank.dodajKarteKlienta(kartadebetowa);
-					bank.dodajKarteKlienta(kartadebetowa1);
-					bank.dodajKarteKlienta(kartadebetowa2);
-					System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
-	
-					if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
-						System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
-																	/// banki, int kwota, String nrKonta:KlientaCentrum,
-																	/// String nrKonta)
-					else
-						System.out.println("Nieudana Autoryzacja");
-					System.out.println("saldo klienta po autoryzacji: " + kartadebetowa.getSaldo());
-					System.out.println(sklep.getSaldo());
-					break;
-			case("14"):
-					System.out.println("Podaj nrkonta, imie, nazwisko, saldo, id, nazwê banku");
-					answer = input.nextLine();
-					System.out.println("Podaj imie");
-					answer1 = input.nextLine();
-					System.out.println("Podaj nazwisko");
-					answer2 = input.nextLine();
-					System.out.println("nazwê banku");
-					answer4 = input.nextLine();
-					boolean flaga = false;
-					System.out.println("saldo");
-					answer3 = input.nextDouble();
-					int m=0;
-					
-					for(Bank i : banki.getListaBankow())
-					{
-						if(i.getNazwa().equals(answer4) ) {
-							
-							for(KartaPlatnicza k : i.getKartyKlientow())
-								if(k.getNrKonta().equals(answer)) {
-									System.out.println("Nr konta zajety");
-									break;
-								}
-								else if(!k.getNrKonta().equals(answer) && flaga == false) {
-								m=banki.getListaBankow().indexOf(i);
+				Bank bank = new Bank("BZWBK");
+				banki.dodaj(bank);
+
+				Sklep sklep = new Sklep("ABC", "156987");
+				Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
+				centrumobslugi.dodaj(sklep);
+				centrumobslugi.dodaj(zaklad);
+
+				KartaDebetowa kartadebetowa = new KartaDebetowa("123654", "Joanna", "Krawczyk", 100.0);
+				KartaDebetowa kartadebetowa1 = new KartaDebetowa("123656", "Adam", "Malysz", 1000.0);
+				KartaDebetowa kartadebetowa2 = new KartaDebetowa("567896", "Jan", "Destrojer", 100000.0);
+
+				bank.dodajKarteKlienta(kartadebetowa);
+				bank.dodajKarteKlienta(kartadebetowa1);
+				bank.dodajKarteKlienta(kartadebetowa2);
+				System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
+
+				if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
+					System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
+																/// banki, int kwota, String nrKonta:KlientaCentrum,
+																/// String nrKonta)
+				else
+					System.out.println("Nieudana Autoryzacja");
+				System.out.println("saldo klienta po autoryzacji: " + kartadebetowa.getSaldo());
+				System.out.println(sklep.getSaldo());
+				break;
+			case ("14"):
+				System.out.println("Podaj nrkonta, imie, nazwisko, saldo, id, nazwê banku");
+				answer = input.nextLine();
+				System.out.println("Podaj imie");
+				answer1 = input.nextLine();
+				System.out.println("Podaj nazwisko");
+				answer2 = input.nextLine();
+				System.out.println("nazwê banku");
+				answer4 = input.nextLine();
+				boolean flaga = false;
+				System.out.println("saldo");
+				answer3 = input.nextDouble();
+				int m = 0;
+
+				for (Bank i : banki.getListaBankow()) {
+					if (i.getNazwa().equals(answer4)) {
+
+						for (KartaPlatnicza k : i.getKartyKlientow())
+							if (k.getNrKonta().equals(answer)) {
+								System.out.println("Nr konta zajety");
+								break;
+							} else if (!k.getNrKonta().equals(answer) && flaga == false) {
+								m = banki.getListaBankow().indexOf(i);
 								System.out.println("Dodano kartê platnicz¹");
-								flaga = true;}
-						}
-					}
-					
-					if(flaga == false ) System.out.println("Coœ posz³o nie tak :C");
-					if(flaga == true )  banki.getListaBankow().get(m).dodajKarteKlienta(new KartaDebetowa(answer,answer1,answer2,answer3));
-					
-			
-			
-					break;
-			case ("15"):
-					System.out.println("Podaj numer konta karty p³atniczej któr¹ chcesz usun¹æ");
-					answer = input.nextLine();
-					int kp=0,ba=0;
-					flaga = false;
-					
-					for (Bank i : banki.getListaBankow()) {
-						for(KartaPlatnicza k : i.getKartyKlientow())
-							if(k.getNrKonta().equals(answer)) { 
 								flaga = true;
-								kp=i.getKartyKlientow().indexOf(k);
-								ba=banki.getListaBankow().indexOf(i);
 							}
 					}
-					if(flaga = true && banki.getListaBankow().size() != 0) {
-						banki.getListaBankow().get(ba).getKartyKlientow().remove(kp);
-						System.out.println("Usunieto karte p³atnicz¹");}
-					else
-					System.out.println("Nie znaleziono karty o podym numerze konta");	
-				
-				
+				}
+
+				if (flaga == false)
+					System.out.println("Coœ posz³o nie tak :C");
+				if (flaga == true)
+					banki.getListaBankow().get(m)
+							.dodajKarteKlienta(new KartaDebetowa(answer, answer1, answer2, answer3));
+
+				break;
+			case ("15"):
+				System.out.println("Podaj numer konta karty p³atniczej któr¹ chcesz usun¹æ");
+				answer = input.nextLine();
+				int kp = 0, ba = 0;
+				flaga = false;
+
+				for (Bank i : banki.getListaBankow()) {
+					for (KartaPlatnicza k : i.getKartyKlientow())
+						if (k.getNrKonta().equals(answer)) {
+							flaga = true;
+							kp = i.getKartyKlientow().indexOf(k);
+							ba = banki.getListaBankow().indexOf(i);
+						}
+				}
+				if (flaga = true && banki.getListaBankow().size() != 0) {
+					banki.getListaBankow().get(ba).getKartyKlientow().remove(kp);
+					System.out.println("Usunieto karte p³atnicz¹");
+				} else
+					System.out.println("Nie znaleziono karty o podym numerze konta");
+
 			}
 
 		}

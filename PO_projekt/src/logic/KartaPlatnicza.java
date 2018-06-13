@@ -58,7 +58,7 @@ public class KartaPlatnicza implements Serializable {
 		data = date.toString();
 
 	}
-	
+
 	public KartaPlatnicza() {
 		this.nrKonta = "986566";
 		this.imie = "JAn";
@@ -67,8 +67,6 @@ public class KartaPlatnicza implements Serializable {
 		this.id = "asd";
 
 	}
-	
-	
 
 	public boolean czyMoznaZaplacic(String nrKonta, double kwota) {
 		if (saldo - kwota > 0)
@@ -90,5 +88,11 @@ public class KartaPlatnicza implements Serializable {
 
 	public String getDataStworzenia() {
 		return dataStworzenia;
+	}
+
+	@Override
+	public String toString() {
+		return "Nr Konta: " + getNrKonta() + " Imie: " + getImie() + " Nazwisko: " + getNazwisko()
+				+ " Data Stworzenia: " + getDataStworzenia();
 	}
 }

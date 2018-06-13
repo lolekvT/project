@@ -21,8 +21,19 @@ public class CentrumObslugi implements Serializable {
 	}
 
 	public void dodaj(KlientCentrum klientcentrum) {
-
 		listaKlientowCentrum.add(klientcentrum);
+	}
+
+	public List<KlientCentrum> znajdzKlientow(String nazwa) {
+		List<KlientCentrum> listaWynikow = new LinkedList<>();
+
+		for (KlientCentrum obj : listaKlientowCentrum) {
+			if (obj.getNazwa().toLowerCase().equals(nazwa.toLowerCase())) {
+				listaWynikow.add(obj);
+			}
+		}
+
+		return listaWynikow;
 	}
 
 }
