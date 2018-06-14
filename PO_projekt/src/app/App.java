@@ -1,6 +1,8 @@
 package app;
 
+import java.io.Console;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,6 +20,7 @@ import logic.KartaPlatnicza;
 import logic.KlientCentrum;
 import logic.Sklep;
 import logic.Zaklad;
+import GUI.*;
 
 public class App {
 
@@ -96,7 +99,7 @@ public class App {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
@@ -105,6 +108,7 @@ public class App {
 		String answer2;
 		double answer3;
 		String answer4;
+		ReadFile menu = new ReadFile();
 
 		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO
 		/////////////////////////////////////////////////////////////////////// DZIALAJACA
@@ -117,25 +121,14 @@ public class App {
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PRZYKLADOWA KONSOLA
 
-		System.out.println("               Witamy w centrum obslugi kart platniczych. Co ¿yczysz sobie zrobiæ: ...");
-		System.out.println("1) Wyswietl firmy korzystajace z centrum");
-		System.out.println("2) Wyswietl banki korzystajace z centrum");
-		System.out.println("3) Dodaj firme");
-		System.out.println("4) Usun firme");
-		System.out.println("5) Dodaj bank");
-		System.out.println("6) Usun bank");
-		System.out.println("7) Obs³u¿ ¿¹danie autoryzacji");
-		System.out.println("8) Przeszukaj archiwum");
-		System.out.println("10) Wyswietl karty platnicze w systemie");
-		System.out.println("11) Zapisz stan systemu na dysk");
-		System.out.println("12) Wczytaj stan systemy z dysku");
-		System.out.println("13) Wczytaj przykladowe dane systemu");
-		System.out.println("14) Dodaj karte platnicza");
-		System.out.println("15) Usun karte platnicza");
-
+		menu.Read();
 		while (true) {
 			answer = input.nextLine();
 			switch (answer) {
+			
+			
+			default:
+				System.out.println("Nie rozumiem ....");
 
 			case ("1"):
 				for (KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
@@ -276,7 +269,7 @@ public class App {
 				System.out.println(sklep.getSaldo());
 				break;
 			case ("14"):
-				System.out.println("Podaj nrkonta, imie, nazwisko, saldo, id, nazwê banku");
+				System.out.println("Podaj nrkonta");
 				answer = input.nextLine();
 				System.out.println("Podaj imie");
 				answer1 = input.nextLine();
@@ -332,6 +325,7 @@ public class App {
 					System.out.println("Nie znaleziono karty o podym numerze konta");
 
 			}
+			
 
 		}
 	}
