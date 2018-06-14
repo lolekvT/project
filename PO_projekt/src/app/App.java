@@ -1,6 +1,5 @@
 package app;
 
-import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import GUI.ReadFile;
 import logic.Bank;
 import logic.Banki;
 import logic.CentrumObslugi;
@@ -20,7 +20,6 @@ import logic.KartaPlatnicza;
 import logic.KlientCentrum;
 import logic.Sklep;
 import logic.Zaklad;
-import GUI.*;
 
 public class App {
 
@@ -125,8 +124,7 @@ public class App {
 		while (true) {
 			answer = input.nextLine();
 			switch (answer) {
-			
-			
+
 			default:
 				System.out.println("Nie rozumiem ....");
 
@@ -325,7 +323,6 @@ public class App {
 					System.out.println("Nie znaleziono karty o podym numerze konta");
 
 			}
-			
 
 		}
 	}
