@@ -1,6 +1,5 @@
 package app;
 
-import java.io.Console;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -11,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import GUI.ReadFile;
 import logic.Bank;
 import logic.Banki;
 import logic.CentrumObslugi;
@@ -98,6 +98,7 @@ public class App {
 		}
 
 	}
+	
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -123,8 +124,10 @@ public class App {
 		while (true) {
 			System.out.println("Podaj nr swojego wyboru");
 			mainanswer = input.nextLine();
+			
 			switch (mainanswer) {
 			
+
 
 			case ("1"):
 				for (KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
@@ -342,9 +345,8 @@ public class App {
 				//System.out.println("Nie rozumiem ....");
 
 			}
-			
 
 		}
 	}
-
 }
+
