@@ -2,7 +2,7 @@ package logic;
 
 import java.util.Date;
 
-public class KlientCentrum extends Banki {
+public class KlientCentrum {
 	private static final long serialVersionUID = 1L;
 	protected String nrKonta;
 	protected String nazwa;

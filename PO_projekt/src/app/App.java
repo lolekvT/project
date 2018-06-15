@@ -104,42 +104,38 @@ public class App {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		String answer;
+		String mainanswer;
 		String answer1;
 		String answer2;
 		double answer3;
 		String answer4;
 		ReadFile menu = new ReadFile();
 
-		/////////////////////////////////////////////////////////////////////// PRZYKLADOWO
-		/////////////////////////////////////////////////////////////////////// DZIALAJACA
-		/////////////////////////////////////////////////////////////////////// APLIKACJA
+
 		CentrumObslugi centrumobslugi = new CentrumObslugi();
 		Banki banki = new Banki();
 
-		// centrumobslugi = loadObjectsFromFile();
+	
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// PRZYKLADOWA KONSOLA
 
 		menu.Read();
 		while (true) {
-			answer = input.nextLine();
-			switch (answer) {
+			System.out.println("Podaj nr swojego wyboru");
+			mainanswer = input.nextLine();
+			switch (mainanswer) {
 			
-			
-			default:
-				System.out.println("Nie rozumiem ....");
 
 			case ("1"):
 				for (KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
-					// System.out.println(i.getNazwa()+" "+i.getSaldo()+" "+i.getNrKonta());
+					
 					System.out.printf("%-17s\t %.2f$\t %10s \t%s\n", i.getNazwa(), i.getSaldo(), i.getNrKonta(),
 							i.getDataDolaczenia());
 
 				break;
 			case ("2"):
 				for (Bank i : banki.getListaBankow()) {
-					// System.out.println(i.getNazwa());
+					
 					System.out.printf("%-17s\t %d \t%s\n", i.getNazwa(), i.getRozmiarListyKlientow(),
 							i.getDataStworzenia());
 				}
@@ -162,7 +158,6 @@ public class App {
 					System.out.println("Podaj nrKonta");
 					answer1 = input.nextLine();
 					Zaklad z = new Zaklad(answer, answer1);
-					// lzaklady.add(z);
 					centrumobslugi.dodaj(z);
 					break;
 				}
@@ -172,7 +167,6 @@ public class App {
 					System.out.println("Podaj nrKonta");
 					answer1 = input.nextLine();
 					Firma f = new Firma(answer, answer1);
-					// lfirmy.add(f);
 					centrumobslugi.dodaj(f);
 					break;
 				} else
@@ -243,30 +237,44 @@ public class App {
 				break;
 			case ("13"):
 				Bank bank = new Bank("BZWBK");
+				Bank bank1 = new Bank("BNG");
+				Bank bank2 = new Bank("LNG");
 				banki.dodaj(bank);
+				banki.dodaj(bank1);
+				banki.dodaj(bank2);
 
 				Sklep sklep = new Sklep("ABC", "156987");
 				Zaklad zaklad = new Zaklad("Fryzjek Maciek", "469877");
+				Zaklad zaklad1 = new Zaklad("Guru", "469810");
+				Sklep sklep2 = new Sklep("GURU Shoping", "146687");
+				Sklep firma = new Sklep("Pudzian Transport", "145987");
 				centrumobslugi.dodaj(sklep);
 				centrumobslugi.dodaj(zaklad);
+				centrumobslugi.dodaj(zaklad1);
+				centrumobslugi.dodaj(sklep2);
+				centrumobslugi.dodaj(firma);
 
 				KartaDebetowa kartadebetowa = new KartaDebetowa("123654", "Joanna", "Krawczyk", 100.0);
 				KartaDebetowa kartadebetowa1 = new KartaDebetowa("123656", "Adam", "Malysz", 1000.0);
 				KartaDebetowa kartadebetowa2 = new KartaDebetowa("567896", "Jan", "Destrojer", 100000.0);
+				KartaDebetowa kartadebetowa3 = new KartaDebetowa("567996", "Hubert", "Dealer", 90000.0);
+				KartaDebetowa kartadebetowa4 = new KartaDebetowa("567996", "Franciszek", "Kowalski", 9560.0);
+				KartaDebetowa kartadebetowa5 = new KartaDebetowa("467990", "Tadeusz", "Tetmajer", 1000.0);
 
 				bank.dodajKarteKlienta(kartadebetowa);
 				bank.dodajKarteKlienta(kartadebetowa1);
 				bank.dodajKarteKlienta(kartadebetowa2);
-				System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
+				bank.dodajKarteKlienta(kartadebetowa3);
+				bank1.dodajKarteKlienta(kartadebetowa4);
+				bank1.dodajKarteKlienta(kartadebetowa5);
+				/*System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
 
 				if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
-					System.out.println("Udana Autoryzacja"); /// Nale¿y zmieniæ parametry metody Autoryzuj na(Banki
-																/// banki, int kwota, String nrKonta:KlientaCentrum,
-																/// String nrKonta)
+					System.out.println("Udana Autoryzacja"); 
 				else
 					System.out.println("Nieudana Autoryzacja");
 				System.out.println("saldo klienta po autoryzacji: " + kartadebetowa.getSaldo());
-				System.out.println(sklep.getSaldo());
+				System.out.println(sklep.getSaldo());*/
 				break;
 			case ("14"):
 				System.out.println("Podaj nrkonta");
@@ -278,7 +286,7 @@ public class App {
 				System.out.println("nazwê banku");
 				answer4 = input.nextLine();
 				boolean flaga = false;
-				System.out.println("saldo");
+				System.out.println("Podaj saldo");
 				answer3 = input.nextDouble();
 				int m = 0;
 
@@ -287,22 +295,26 @@ public class App {
 
 						for (KartaPlatnicza k : i.getKartyKlientow())
 							if (k.getNrKonta().equals(answer)) {
-								System.out.println("Nr konta zajety");
 								break;
 							} else if (!k.getNrKonta().equals(answer) && flaga == false) {
 								m = banki.getListaBankow().indexOf(i);
-								System.out.println("Dodano kartê platnicz¹");
 								flaga = true;
+								break;
 							}
+						if(i.getRozmiarListyKlientow() == 0)
+							flaga = true;
 					}
 				}
-
+				
+				
+				
 				if (flaga == false)
-					System.out.println("Coœ posz³o nie tak :C");
-				if (flaga == true)
-					banki.getListaBankow().get(m)
-							.dodajKarteKlienta(new KartaDebetowa(answer, answer1, answer2, answer3));
-
+					System.out.println("Bank nie istnieje b¹dz podano istniej¹cy nr konta !");
+			
+				if (flaga == true) {
+					banki.getListaBankow().get(m).dodajKarteKlienta(new KartaDebetowa(answer, answer1, answer2, answer3));
+					System.out.println("Dodano karte p³atnicz¹!");
+				}
 				break;
 			case ("15"):
 				System.out.println("Podaj numer konta karty p³atniczej któr¹ chcesz usun¹æ");
@@ -318,11 +330,16 @@ public class App {
 							ba = banki.getListaBankow().indexOf(i);
 						}
 				}
+				
 				if (flaga = true && banki.getListaBankow().size() != 0) {
 					banki.getListaBankow().get(ba).getKartyKlientow().remove(kp);
-					System.out.println("Usunieto karte p³atnicz¹");
+					System.out.println("Usunieto karte p³atnicz¹!");
 				} else
-					System.out.println("Nie znaleziono karty o podym numerze konta");
+					System.out.println("Nie znaleziono karty o podym numerze konta!");
+				break;
+				
+			default:
+				//System.out.println("Nie rozumiem ....");
 
 			}
 			
