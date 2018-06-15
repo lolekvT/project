@@ -20,7 +20,6 @@ import logic.KartaPlatnicza;
 import logic.KlientCentrum;
 import logic.Sklep;
 import logic.Zaklad;
-import GUI.*;
 
 public class App {
 
@@ -96,7 +95,6 @@ public class App {
 		for (Object obj : listaWynikow) {
 			System.out.println(obj);
 		}
-
 	}
 	
 
@@ -122,12 +120,12 @@ public class App {
 
 		menu.Read();
 		while (true) {
-			System.out.println("Podaj nr swojego wyboru");
+			System.out.println("Podaj nr swojego wyboru (opcje 1-15)");
 			mainanswer = input.nextLine();
 			
 			switch (mainanswer) {
 			
-
+			
 
 			case ("1"):
 				for (KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
@@ -298,11 +296,11 @@ public class App {
 
 						for (KartaPlatnicza k : i.getKartyKlientow())
 							if (k.getNrKonta().equals(answer)) {
-								break;
+								
 							} else if (!k.getNrKonta().equals(answer) && flaga == false) {
 								m = banki.getListaBankow().indexOf(i);
 								flaga = true;
-								break;
+								
 							}
 						if(i.getRozmiarListyKlientow() == 0)
 							flaga = true;
@@ -342,7 +340,7 @@ public class App {
 				break;
 				
 			default:
-				//System.out.println("Nie rozumiem ....");
+				System.out.println("Nie rozumiem ....");
 
 			}
 
