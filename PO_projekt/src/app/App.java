@@ -96,7 +96,6 @@ public class App {
 			System.out.println(obj);
 		}
 	}
-	
 
 	public static void main(String[] args) throws FileNotFoundException {
 
@@ -110,33 +109,28 @@ public class App {
 		String answer4;
 		ReadFile menu = new ReadFile();
 
-
 		CentrumObslugi centrumobslugi = new CentrumObslugi();
 		Banki banki = new Banki();
-
-	
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		menu.Read();
 		while (true) {
-			System.out.println("Podaj nr swojego wyboru (opcje 1-15)");
+			System.out.println("					Podaj nr swojego wyboru (opcje 1-15)");
 			mainanswer = input.nextLine();
-			
+
 			switch (mainanswer) {
-			
-			
 
 			case ("1"):
 				for (KlientCentrum i : centrumobslugi.getListaKlientowCentrum())
-					
+
 					System.out.printf("%-17s\t %.2f$\t %10s \t%s\n", i.getNazwa(), i.getSaldo(), i.getNrKonta(),
 							i.getDataDolaczenia());
 
 				break;
 			case ("2"):
 				for (Bank i : banki.getListaBankow()) {
-					
+
 					System.out.printf("%-17s\t %d \t%s\n", i.getNazwa(), i.getRozmiarListyKlientow(),
 							i.getDataStworzenia());
 				}
@@ -151,6 +145,7 @@ public class App {
 					answer1 = input.nextLine();
 					Sklep s = new Sklep(answer, answer1);
 					centrumobslugi.dodaj(s);
+					System.out.println("Dodano sklep");
 					break;
 				}
 				if (answer.equals("2")) {
@@ -160,6 +155,7 @@ public class App {
 					answer1 = input.nextLine();
 					Zaklad z = new Zaklad(answer, answer1);
 					centrumobslugi.dodaj(z);
+					System.out.println("Dodano zak³ad");
 					break;
 				}
 				if (answer.equals("3")) {
@@ -169,6 +165,7 @@ public class App {
 					answer1 = input.nextLine();
 					Firma f = new Firma(answer, answer1);
 					centrumobslugi.dodaj(f);
+					System.out.println("Dodano firmê");
 					break;
 				} else
 					System.out.println("Nie rozumiem");
@@ -181,12 +178,14 @@ public class App {
 					if (i.getNazwa().equals(answer))
 						banki.usun(i);
 				}
+				System.out.println("Usuniêto bank");
 				break;
 			case ("5"):
 				System.out.println("Podaj nazwê");
 				answer = input.nextLine();
 				Bank b = new Bank(answer);
 				banki.dodaj(b);
+				System.out.println("Dodano bank");
 				break;
 			case ("4"):
 				System.out.println("Podaj nazwê");
@@ -195,6 +194,7 @@ public class App {
 					if (i.getNazwa().equals(answer))
 						centrumobslugi.getListaKlientowCentrum().remove(i);
 				}
+				System.out.println("Usuniêto firmê");
 				break;
 			case ("7"):
 				System.out.println("Podaj nazwê swojej firmy");
@@ -268,14 +268,16 @@ public class App {
 				bank.dodajKarteKlienta(kartadebetowa3);
 				bank1.dodajKarteKlienta(kartadebetowa4);
 				bank1.dodajKarteKlienta(kartadebetowa5);
-				/*System.out.println("saldo klienta przed autoryzacj¹: " + kartadebetowa.getSaldo());
-
-				if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
-					System.out.println("Udana Autoryzacja"); 
-				else
-					System.out.println("Nieudana Autoryzacja");
-				System.out.println("saldo klienta po autoryzacji: " + kartadebetowa.getSaldo());
-				System.out.println(sklep.getSaldo());*/
+				/*
+				 * System.out.println("saldo klienta przed autoryzacj¹: " +
+				 * kartadebetowa.getSaldo());
+				 * 
+				 * if (sklep.Autoryzuj(banki, 20.0, "156987", "123654") == true)
+				 * System.out.println("Udana Autoryzacja"); else
+				 * System.out.println("Nieudana Autoryzacja");
+				 * System.out.println("saldo klienta po autoryzacji: " +
+				 * kartadebetowa.getSaldo()); System.out.println(sklep.getSaldo());
+				 */
 				break;
 			case ("14"):
 				System.out.println("Podaj nrkonta");
@@ -296,24 +298,23 @@ public class App {
 
 						for (KartaPlatnicza k : i.getKartyKlientow())
 							if (k.getNrKonta().equals(answer)) {
-								
+
 							} else if (!k.getNrKonta().equals(answer) && flaga == false) {
 								m = banki.getListaBankow().indexOf(i);
 								flaga = true;
-								
+
 							}
-						if(i.getRozmiarListyKlientow() == 0)
+						if (i.getRozmiarListyKlientow() == 0)
 							flaga = true;
 					}
 				}
-				
-				
-				
+
 				if (flaga == false)
 					System.out.println("Bank nie istnieje b¹dz podano istniej¹cy nr konta !");
-			
+
 				if (flaga == true) {
-					banki.getListaBankow().get(m).dodajKarteKlienta(new KartaDebetowa(answer, answer1, answer2, answer3));
+					banki.getListaBankow().get(m)
+							.dodajKarteKlienta(new KartaDebetowa(answer, answer1, answer2, answer3));
 					System.out.println("Dodano karte p³atnicz¹!");
 				}
 				break;
@@ -331,14 +332,14 @@ public class App {
 							ba = banki.getListaBankow().indexOf(i);
 						}
 				}
-				
+
 				if (flaga = true && banki.getListaBankow().size() != 0) {
 					banki.getListaBankow().get(ba).getKartyKlientow().remove(kp);
 					System.out.println("Usunieto karte p³atnicz¹!");
 				} else
 					System.out.println("Nie znaleziono karty o podym numerze konta!");
 				break;
-				
+
 			default:
 				System.out.println("Nie rozumiem ....");
 
@@ -347,4 +348,3 @@ public class App {
 		}
 	}
 }
-
